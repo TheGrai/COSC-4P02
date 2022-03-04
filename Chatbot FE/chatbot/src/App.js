@@ -1,8 +1,12 @@
 import './App.css';
 import React from "react"
 import { useState } from "react";
-import BUChat from "./BUChat";
-import CGChat from "./CGChat";
+import BUChat from "./components/BUChat";
+import CGChat from "./components/CGChat";
+
+//When running this application in IntelliJ IDEA, use the following configurations
+//Create a new configuration from npm, the name is npm start, point the package.json directory to the package.json file in this source
+//The command should be run, and the scripts should be start. React will start with npm and open a new page on your browser.
 
 const styles = {
   button1: {
