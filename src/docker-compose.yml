@@ -1,5 +1,4 @@
 version: '3.9'
-
 services:
   db:
     image: postgres
@@ -9,9 +8,15 @@ services:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-  web:
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
+  NiagraDB:
+    image: postgres
+    volumes:
+      - ./data/NiagraDB:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_NAME=niagara
+  backend:
+    build: backend
+    command: bash -c "python backend/manage.py migrate && python backend/manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:
