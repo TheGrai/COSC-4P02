@@ -1,5 +1,4 @@
 import os
-
 """
 Django settings for config project.
 
@@ -22,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-lp-c0ag6+xs_05opq*7o9pa)ztvr1itw4_l9j+r_x1sg#4j&cg'
+SECRET_KEY = 'django-insecure-(f1%0y1s5^+=42luk^sl%bs#5o-pq7p5se4^&vk@=jq7y3yhnp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -36,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
@@ -77,10 +77,18 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_NAME'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': 'db',
+        'NAME': os.environ.get('BROCKDB_NAME'),
+        'USER': os.environ.get('BROCKDB_USER'),
+        'PASSWORD': os.environ.get('BROCKDB_PASSWORD'),
+        'HOST': 'brockDB',
+        'PORT': 5432,
+    },
+    'niagaraDB': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('NIAGARADB_NAME'),
+        'USER': os.environ.get('NIAGARADB_USER'),
+        'PASSWORD': os.environ.get('NIAGARADB_PASSWORD'),
+        'HOST': 'niagaraDB',
         'PORT': 5432,
     }
 }
