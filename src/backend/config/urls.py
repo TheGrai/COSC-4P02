@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.http import HttpResponse
 
 def homePageView(request):
-    return HttpResponse("Hello, World!")
+    return HttpResponse("Testing Connection to API Complete")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
