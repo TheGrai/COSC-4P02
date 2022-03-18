@@ -4,12 +4,16 @@ services:
     image: postgres
     volumes:
       - ./data/BrockDB:/var/lib/postgresql/data
+    ports:
+      - "1812:5432"
     environment:
       - POSTGRES_NAME=badgers
       - POSTGRES_USER=badgers
       - POSTGRES_PASSWORD=badgers
   niagaraDB:
     image: postgres
+    ports:
+      - "1337:5432"
     volumes:
       - ./data/NiagraDB:/var/lib/postgresql/data
     environment:
