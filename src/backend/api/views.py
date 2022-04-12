@@ -2,9 +2,6 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 @api_view(['GET'])
-def getRoutes(request):
-    routes = [
-        'GET /api/courses',
-        'GET /api/courses/:code'
-    ]
-    return Response(routes)
+def generateMessageResponse(request):
+    response = 'Recieved Message: ' + request.query_params['message'] + '. Have a great Day!'
+    return Response({'message': response})
