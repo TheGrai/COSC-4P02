@@ -1,0 +1,88 @@
+{"intents": [
+  {
+    "topic": "greeting",
+    "patterns": ["hi", "hello", "hi", "hey", "greetings", "good day", "hello", "hallo", "nice to meet you"],
+    "responses": ["Hi, I am the Canada Games Chat bot, how may I help you?"]
+  },
+  {
+    "topic": "goodbye",
+    "patterns": ["bye", "goodbye", "cya", "see you later", "i am leaving", "good day", "see ya", "bye bye", "till next time", "have a nice day"],
+    "responses": ["Bye!", "Goodbye!"]
+  },
+  {
+    "topic": "thanks",
+    "patterns": ["thanks", "thank you", "that helped", "that's helpful"],
+    "responses": ["You are welcome!", "My pleasure!", "Happy to help!", "Any time!"]
+  },
+  {
+    "topic": "unknown",
+    "patterns": [],
+    "responses": ["Sorry, I do not understand what you are saying"]
+  },
+  {
+    "topic": "website",
+    "patterns": ["What is Canada Games Website", "website"],
+    "responses": ["The Canada Games website is https://niagara2022games.ca/"]
+  },
+  {
+    "topic": "when",
+    "patterns": ["How long until the Canada Games Starts", "how long until", "when do the canada games start"],
+    "responses": ["The Canada Games Website says the event starts in ____ days"]
+  },
+  {
+    "topic": "news",
+    "patterns": ["What's new with the Canada Games", "News", "anything new"],
+    "responses": ["The Canada Games news can be found at https://niagara2022games.ca/news/", "The Canada Games news is available here https://niagara2022games.ca/news/"]
+  },
+  {
+    "topic": "where",
+    "patterns": ["Where is the Canada Games", "where"],
+    "responses": ["The Canada Games events will be taking place in various locations across the Niagara region, locations for specific sports can be found here https://niagara2022games.ca/venues/"]
+  },
+  {
+    "topic": "tickets",
+    "patterns": ["Where can I buy tickets", "tickets"],
+    "responses": ["Tickets and ticket information can be obtained here https://niagara2022games.ca/tickets/"]
+  },
+  {
+    "topic": "transportation",
+    "patterns": ["What transportation options are available", "transportation", "how do I get to"],
+    "responses": ["Niagara Region Transit information is available here https://www.niagararegion.ca/transit/"]
+  },
+  {
+    "topic": "transit app",
+    "patterns": ["Is there an app for the buses", "bus app", "app"],
+    "responses": ["The Niagara Region Transit app for both Android and iOS is available here https://transitapp.com/"]
+  },
+  {
+    "topic": "niagara do",
+    "patterns": ["What can you do in the Niagara region", "can do", "do"],
+    "responses": ["The Niagara Falls Tourism website provided here https://www.niagarafallstourism.com/play/ has information about what you can see and do in the region"]
+  },
+  {
+    "topic": "niagara stay",
+    "patterns": ["Where can I stay in the Niagara region", "stay", "hotel", "live", "sleep"],
+    "responses": ["The Niagara Falls Tourism website provided here https://www.niagarafallstourism.com/sleep/ has information about accommodations in Niagara Region"]
+  },
+  {
+    "topic": "niagara covid",
+    "patterns": ["What are the COVID-19 restrictions like in Niagara", "niagara covid", "niagara restrictions", "niagara masks", "masks", "vaccine", "niagara vaccine"],
+    "responses": ["The Niagara region COVID-19 information can be found here https://www.niagararegion.ca/health/covid-19/"]
+  },
+
+  {
+    "topic": "athlete",
+    "patterns": ["Tell me about", "What sport did"],
+    "responses": ["athlete"]
+  },
+  {
+    "topic": "score",
+    "patterns": ["How many medals", "medals", "how many"],
+    "responses": ["score"]
+  },
+  {
+    "topic": "schedule",
+    "patterns": ["when is the next game", "when is", "schedule"],
+    "responses": ["schedule"]
+  }
+]}
