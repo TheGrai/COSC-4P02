@@ -1,20 +1,27 @@
 import React from "react";
 import { ChatFeed, Message} from "react-chat-ui";
+import { render } from "react-dom";
+import "./style.css"
 
 const users = {
   0: "You",
-  1: "Bot"
+  1: "G.R.A.N.T."
 };
 
 class BUChat extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       messages: [
         new Message({ id: 1, message: "Hello! Welcome to the Brock University Chat Bot!", senderName: "G.R.A.N.T." }),
       ],
       useCustomBubble: false,
-      curr_user: 0
+      curr_user: 0,
+
+      active: (props.locked && props.active) || false,
+      value: props.value || "",
+      error: props.error || "",
+      label: props.label || "Type a message..."
     };
   }
 
@@ -24,8 +31,9 @@ class BUChat extends React.Component {
     if (!input.value) {
       return false;
     }
-    this.pushMessage(this.state.curr_user, input.value);
+    this.pushMessage(0, input.value);
     input.value = "";
+    this.pushMessage(1, "Brock University 'Important Dates' page can be found at https://www.brocku.ca/important-dates" );
     return true;
   }
 
@@ -41,6 +49,10 @@ class BUChat extends React.Component {
   }
 
   render() {
+    const { active, value, error, label } = this.state;
+    const { locked } = this.props;
+    const fieldClassName = `field ${(locked ? active : active || value) &&
+      "active"} ${locked && !active && "locked"}`;
     return (
       <div className="container">
         <div className="chatfeed-wrapper">
@@ -52,22 +64,30 @@ class BUChat extends React.Component {
             bubbleStyles={{
               chatbubble: {
 
-                backgroundColor: "#b81414"
+                backgroundColor: "#dc4141"
 
               },
             }
             }
           />
-
-          <form onSubmit={e => this.onMessageSubmit(e)}>
-            <input
-              ref={m => {
-                this.message = m;
-              }}
-              placeholder="Type a message..."
-              className="message-input"
-            />
-          </form>
+          <div className={fieldClassName}>
+          {active &&
+            value}
+            <form onSubmit={e => this.onMessageSubmit(e)}>
+              <input
+                ref={m => {
+                  this.message = m;
+                }}
+                className="message-input"
+                placeholder="Type a message..."
+                onFocus={() => !locked && this.setState({ active: true })}
+                onBlur={() => !locked && this.setState({ active: false })}
+              />
+              <label htmlFor={1} className={error && "error"}>
+                {error || label}
+              </label>
+            </form>
+          </div>
           
         </div>
       </div>

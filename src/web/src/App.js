@@ -1,12 +1,8 @@
 import './App.css';
 import React from "react"
 import { useState } from "react";
-import BUChat from "./components/BUChat";
-import CGChat from "./components/CGChat";
-
-//When running this application in IntelliJ IDEA, use the following configurations
-//Create a new configuration from npm, the name is npm start, point the package.json directory to the package.json file in this source
-//The command should be run, and the scripts should be start. React will start with npm and open a new page on your browser.
+import BUChat from "./BUChat";
+import CGChat from "./CGChat";
 
 const styles = {
   button1: {
@@ -64,11 +60,13 @@ function App() {
 
 function BrockCB() {
 
-  document.body.style.backgroundColor = '#ed9a9a';
+  //document.body.style.backgroundColor = '#ed9a9a';
+  document.body.classList.add("bu");
+  document.body.classList.remove("cg");
 
   return (
     <div> 
-      <p style = {styles.chatTitle}>Brock University Chat</p>
+      <img src = "brocku.png" height = "75"/>
       <BUChat />
     </div>
     
@@ -77,11 +75,13 @@ function BrockCB() {
 
 function CanadaGamesCB() {
 
-  document.body.style.backgroundColor = '#abc5f5';
+  //document.body.style.backgroundColor = '#abc5f5';
+  document.body.classList.add("cg");
+  document.body.classList.remove("bu");
 
   return (
     <div> 
-      <p style = {styles.chatTitle}>Canada Games Chat</p>
+      <img src = "canada games.png" height = "75"/>
       <CGChat />
     </div>
   )
