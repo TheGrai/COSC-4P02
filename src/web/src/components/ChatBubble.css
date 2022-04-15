@@ -1,0 +1,19 @@
+.chat-bubble {
+  padding: 4px 16px; 
+  border-radius: 5px; 
+  box-shadow: 0 2px 6px rgba(20, 48, 84, 0.2);
+  border: 1px solid #DAE1E8;
+  width: 200px;
+}
+
+.current-user { 
+  background-color: red;
+  align-self: flex-end;
+  color: white;
+}
+
+.not-current-user {
+  background-color: #FFFFFF;
+  align-self: flex-start;
+  color: black
+}
