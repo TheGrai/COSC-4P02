@@ -2,6 +2,7 @@ import random
 import json
 import pickle
 import re
+import datetime
 
 import numpy as np
 
@@ -17,7 +18,13 @@ words = pickle.load(open('wordsCG.pkl', 'rb'))
 classes = pickle.load(open('classesCG.pkl', 'rb'))
 model = load_model('chatbot_CG_model.h5')
 
+listOfSports = ["Athletics", "Baseball", "Basketball", "Box Lacrosse", "Canoe Cayak", "Cycling", "Diving", "Golf", "Rowing", "Rugby Sevens", "Sailing", "Soccer", "Softball", "Swimming", "Tennis", "Triathon", "Volleyball", "Wrestling"]
 
+listOfProvTerCodes = ["NL", "PE", "NS", "NB", "QC", "ON", "MB", "SK", "AB", "BC", "YT", "NT", "NU"]
+listOfProvTerNames = [["Newfoundland", "labrador"],["prince", "edward", "island"],["nova", "scotia"],["new", "brunswick"],["Quebec"],["Ontario"],["Manitoba"],
+                      ["saskatchewan"],["alberta"],["british", "columbia", " bc "],["yukon"],["northwest", "territories"],["nunavut"]]
+
+medalType = ["bronze", "silver", "gold"]
 def clean_up_sentence(sentence):
     sentence_words = nltk.word_tokenize(sentence)
     sentence_words = [lemmatizer.lemmatize(word.lower()) for word in sentence_words]
@@ -54,7 +61,7 @@ def get_response(intents_list, intents_json, message):
     for i in list_of_intents:
         if i['topic'] == topic:
             response = random.choice(i['responses'])
-            if response == "course":
+            if response == "athlete":
                 course_regex = re.compile(r'[a-z]{4} *[0-5][a-z][0-9][0-9]')
                 course = course_regex.search(message)
                 if course is not None:
@@ -72,31 +79,58 @@ def get_response(intents_list, intents_json, message):
                 else:
                     response = "∆ Please provide a valid course code"
 
-            elif response == "exam":
-                course_regex = re.compile(r'[a-z]{4} *[0-5][a-z][0-9][0-9]')
-                course = course_regex.search(message)
-                if course is not None:
-                    response = ["exam", course.group()]
-                    if re.search("when", message) or re.search("time", message):
-                        response.append("time")
-                    elif re.search("where", message) or re.search("location", message):
-                        response.append("location")
-                    else:
-                        response.append("about")
+            elif response == "score":
+                provter = None
+                ind = 0
+                for prv in listOfProvTerNames:
+                    for nm in prv:
+                        if re.search(nm, message, re.IGNORECASE):
+                            provter = listOfProvTerCodes[ind]
+                            break
+                    ind = ind + 1
+                    if provter is not None:
+                        break
+                if provter is not None:
+                    response = ["score", provter]
+                    mt = None
+                    for tp in medalType:
+                        if re.search(tp, message, re.IGNORECASE):
+                            mt = tp
+                            break
+                    if mt is not None:
+                        response.append(mt)
                 else:
-                    response = "∆ Please provide a valid course code"
+                    response = "∆ Please provide a valid Province/Territory"
 
-            elif response == "program":
-                program_regex = re.compile(r'[a-z]* program')
-                program = program_regex.search(message)
-                if program is not None:
-                    response = ["program", program.group()]
-                    if re.search("requirement", message):
-                        response.append("requirement")
-                    else:
-                        response.append("about")
+            elif response == "schedule":
+                response = ["schedule"]
+                sport = None
+                for sp in listOfSports:
+                    if re.search(sp, message, re.IGNORECASE):
+                            sport = sp
+                            break
+                if sport is not None:
+                    response = ["schedule", sport]
+                    provter = None
+                    ind = 0
+                    for prv in listOfProvTerNames:
+                        for nm in prv:
+                            if re.search(nm, message, re.IGNORECASE):
+                                provter = listOfProvTerCodes[ind]
+                                break
+                        ind = ind + 1
+                        if provter is not None:
+                            break
+                    if provter is not None:
+                        response.append(provter)
                 else:
-                    response = "∆ idk"
+                    response = "∆ Please provide a valid sport"
+            elif response == "when":
+                today = datetime.date.today()
+                start = datetime.date(2022, 8, 6)
+                timeTil = start - today
+
+                response = "The Canada Website says the event starts in " + str(timeTil.days) + " days"
 
             return response
 

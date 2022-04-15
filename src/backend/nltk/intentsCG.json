@@ -26,12 +26,13 @@
   },
   {
     "topic": "when",
-    "patterns": ["How long until the Canada Games Starts", "how long until", "when do the canada games start", "when are the canada games", "when are the canada games"],
-    "responses": ["The Canada Games Website says the event starts in ____ days"]
+    "patterns": ["How long until the Canada Games Starts", "how long until", "when do the canada games start", "when are the canada games", "when are the canada games", "how long till the games",
+      "how long till the niagara games starts", "how long until the canada games"],
+    "responses": ["when"]
   },
   {
     "topic": "news",
-    "patterns": ["What's new with the Canada Games", "News", "anything new", "is there any news", "canada games news", "news with the canada games"],
+    "patterns": ["What's new with the Canada Games", "News", "anything new", "is there any news", "canada games news", "news with the canada games", "any news about the games", "any news with the games", "any news with the canada games"],
     "responses": ["The Canada Games news can be found at https://niagara2022games.ca/news/", "The Canada Games news is available here https://niagara2022games.ca/news/"]
   },
   {
@@ -66,7 +67,9 @@
   },
   {
     "topic": "niagara covid",
-    "patterns": ["What are the COVID-19 restrictions like in Niagara", "niagara covid", "niagara restrictions", "niagara masks", "masks", "vaccine", "niagara vaccine"],
+    "patterns": ["What are the COVID-19 restrictions like in Niagara", "niagara covid", "niagara restrictions", "niagara masks",
+      "masks", "vaccine", "niagara vaccine", "do I need to wear a mask", "do I need to wear a mask", "mask", "masks", "do we need to wear masks", "vaccine", "how many doses", "do I need my second shot"
+    , "do I need my vaccine", "how many vaccines do i need", "how many shots do I need"],
     "responses": ["The Niagara region COVID-19 information can be found here https://www.niagararegion.ca/health/covid-19/"]
   },
 
@@ -82,7 +85,8 @@
   },
   {
     "topic": "schedule",
-    "patterns": ["when is the next game", "when is the game", "schedule", "game", "when is the event", "how long till the next game"],
+    "patterns": ["when is the next game", "when is the game", "schedule", "game", "when is the event", "how long till the next game", "when does play next",
+      "when does have their next game", "when does have their next event"],
     "responses": ["schedule"]
   }
 ]}
