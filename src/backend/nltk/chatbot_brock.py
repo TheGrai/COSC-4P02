@@ -61,7 +61,7 @@ def get_response(intents_list, intents_json, message):
                     response = ["course", course.group()]
                     if re.search("term", message):
                         response.append("term")
-                    elif re.search("who", message):
+                    elif re.search("who", message) or re.search("professor", message) or re.search("prof", message):
                         response.append("teacher")
                     elif re.search("lab", message):
                         response.append("lab")
@@ -91,12 +91,12 @@ def get_response(intents_list, intents_json, message):
                 program = program_regex.search(message)
                 if program is not None:
                     response = ["program", program.group()]
-                    if re.search("requirement", message):
+                    if re.search("requirement", message) or re.search("get into", message):
                         response.append("requirement")
                     else:
                         response.append("about")
                 else:
-                    response = "∆ idk"
+                    response = "∆ Please provide a better question about the program"
 
             return response
 
