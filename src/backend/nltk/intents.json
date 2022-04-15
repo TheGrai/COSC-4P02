@@ -37,12 +37,12 @@
   {
     "topic": "about",
     "patterns": ["Tell me about Brock University", "Brock University"],
-    "responses": ["Brock University “about” page can be found at https://brocku.ca/about/"]
+    "responses": ["Brock University about page can be found at https://brocku.ca/about/"]
   },
   {
     "topic": "important dates",
     "patterns": ["Tell me about Brock University Important Dates", "important dates", "what are the important dates"],
-    "responses": ["Brock University “Important Dates” page can be found at https://brocku.ca/important-dates"]
+    "responses": ["Brock University Important Dates page can be found at https://brocku.ca/important-dates"]
   },
   {
     "topic": "transportation",

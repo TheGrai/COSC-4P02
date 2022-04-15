@@ -1,8 +1,8 @@
 import './App.css';
 import React from "react"
 import { useState } from "react";
-import BUChat from "./BUChat";
-import CGChat from "./CGChat";
+import BUChat from "./components/BUChat";
+import CGChat from "./components/CGChat";
 
 const styles = {
   button1: {
