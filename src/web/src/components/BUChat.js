@@ -1,7 +1,7 @@
 import React from "react";
 import { ChatFeed, Message} from "react-chat-ui";
 import { render } from "react-dom";
-import "./style.css"
+import "../style.css"
 
 const users = {
   0: "You",
