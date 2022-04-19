@@ -29,6 +29,7 @@ export const HomeCG = ({ name, handleNameChange }) => {
 
   return (
     <div className="Home">
+        <img src = "niagara.png" height = "150"/>
       <h1>Canada Games Chat App</h1>
       <h3>About</h3>
       <p>

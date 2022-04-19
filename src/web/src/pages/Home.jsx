@@ -29,6 +29,7 @@ export const Home = ({ name, handleNameChange }) => {
 
   return (
     <div className="Home">
+        <img src = "brockuRed.png" height = "150"/>
       <h1>Brock U Chat App</h1>
       <h3>About</h3>
       <p>

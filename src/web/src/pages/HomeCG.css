@@ -1,11 +1,3 @@
-.Home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: white;
-  padding: 100px;
-  border-radius: 10px;
-}
 
 .name-input-label { 
   width: 100%;
