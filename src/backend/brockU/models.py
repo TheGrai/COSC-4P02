@@ -35,19 +35,15 @@ class Course(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     code = models.CharField(max_length=9, validators=[validate_course_code])
     name = models.CharField(max_length=64)
-    instructor_id = models.ForeignKey('Instructor', null=True, on_delete=models.SET_NULL)
-    duration = models.CharField(max_length=3)
     description = models.TextField(blank=True)
     format = models.TextField(blank=True)
     prerequesites = models.TextField(blank=True)
     exclusions = models.TextField(blank=True)
     restrictions = models.TextField(blank=True)
     notes = models.TextField(blank=True)
-    start_date = models.DateField(null=True)
-    end_date = models.DateField(null=True)
 
 # Create your models here.
-class CourseComponent(models.Model):
+class CourseOffering(models.Model):
     class DeliveryType(models.TextChoices):
         ASYNCHRONOUS = 'ASY', _('Asynchronous Online')
         BLENDED = 'BLD', _('Blended')
@@ -67,6 +63,10 @@ class CourseComponent(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     course_id = models.ForeignKey('Course', on_delete=models.CASCADE)
     delivery_type = models.CharField(choices=DeliveryType.choices, default=DeliveryType.LECTURE, max_length=3)
+    instructor_id = models.ForeignKey('Instructor', null=True, on_delete=models.SET_NULL)
+    duration = models.CharField(max_length=3)
     section = models.IntegerField()
-    location = models.CharField(max_length=10, blank=True)
+    location = models.CharField(max_length=64, blank=True)
+    start_date = models.DateField(null=True)
+    end_date = models.DateField(null=True)
     schedule = models.JSONField(blank=True)
