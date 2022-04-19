@@ -22,7 +22,7 @@ services:
       - POSTGRES_PASSWORD=niagara
   backend:
     build: backend
-    command: bash -c "python manage.py migrate brockU && python manage.py migrate niagaraGames --database niagaraDB && gunicorn config.wsgi --bind 0.0.0.0:2022"
+    command: bash -c "python manage.py migrate && gunicorn config.wsgi --bind 0.0.0.0:2022"
     volumes:
       - ./backend:/code
     ports:
