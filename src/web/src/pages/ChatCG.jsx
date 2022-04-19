@@ -41,6 +41,7 @@ export const ChatCG = ({name}) => {
                     username: name,
                     timestamp: format(new Date(), "p"),
                     ownedByCurrentUser: true,
+                    brockVer: false,
                 },
             ]);
             setInput("");
@@ -60,6 +61,8 @@ export const ChatCG = ({name}) => {
                 username: name,
                 timestamp: format(new Date(), "p"),
                 ownedByCurrentUser: true,
+                brockVer: false,
+
             },
         ]);
         setInput("");
@@ -102,6 +105,7 @@ export const ChatCG = ({name}) => {
                                     username: 'Dr. Bot',
                                     timestamp: format(new Date(), "p"),
                                     ownedByCurrentUser: false,
+                                    brockVer: false,
                                 },
                             ]);
                             console.log(data.message);
@@ -126,7 +130,7 @@ export const ChatCG = ({name}) => {
     return (
         <div className="chat">
             <div className="header">
-                <p>Chat room</p>
+                <img src = "niagara.png" height = "75"/>
                 <button className="backCG-btn" onClick={handleHomeClick}>
                     Home
                 </button>
@@ -152,7 +156,7 @@ export const ChatCG = ({name}) => {
                 </button>
                 <CSVLink
                     data={messages}
-                    className="send-btn download-csv-btn"
+                    className="sendCG-btn download-csv-btn"
                     onClick={handleCSVClick}
                 >
                     &#8595;

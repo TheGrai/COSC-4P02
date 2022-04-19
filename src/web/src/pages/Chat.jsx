@@ -41,6 +41,7 @@ export const Chat = ({name}) => {
                     username: name,
                     timestamp: format(new Date(), "p"),
                     ownedByCurrentUser: true,
+                    brockVer: true,
                 },
             ]);
             setInput("");
@@ -60,6 +61,7 @@ export const Chat = ({name}) => {
                 username: name,
                 timestamp: format(new Date(), "p"),
                 ownedByCurrentUser: true,
+                brockVer: true,
             },
         ]);
         setInput("");
@@ -102,6 +104,7 @@ export const Chat = ({name}) => {
                                     username: 'Dr. Bot',
                                     timestamp: format(new Date(), "p"),
                                     ownedByCurrentUser: false,
+                                    brockVer: false,
                                 },
                             ]);
                             console.log(data.message);
@@ -126,7 +129,7 @@ export const Chat = ({name}) => {
     return (
         <div className="chat">
             <div className="header">
-                <p>Chat room</p>
+                <img src = "brock.png" height = "75"/>
                 <button className="back-btn" onClick={handleHomeClick}>
                     Home
                 </button>
