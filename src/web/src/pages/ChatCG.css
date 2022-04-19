@@ -22,9 +22,9 @@
   gap: 1rem;
 }
 
-.send-btn { 
+.sendCG-btn {
   color: white; 
-  background-color: red;
+  background-color: steelblue;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -54,9 +54,9 @@
   align-items: center;
 }
 
-.back-btn { 
+.backCG-btn {
   color: white; 
-  background-color: red;
+  background-color: steelblue;
   border: none;
   border-radius: 4px;
   cursor: pointer;
