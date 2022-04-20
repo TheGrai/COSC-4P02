@@ -6,6 +6,7 @@ WORKDIR /code
 RUN ls -l
 COPY ./requirements.txt /code/
 RUN pip install -r requirements.txt
+RUN python nltk-download.py
 COPY . .
 
 
