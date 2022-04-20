@@ -16,8 +16,8 @@
   },
   {
     "topic": "unknown",
-    "patterns": ["fjasklfadsf", "wqqreuwoqr", "wadsadsadwa", "qweqrqwereqwrp"],
-    "responses": ["Sorry, I do not understand what you are saying"]
+    "patterns": [],
+    "responses": ["Sorry, I do not understand what you are saying. Please try and rephrase your question and so I can better understand.", "Sorry, that didn't really make sense to me. Please try and rephrase your question and so I can better understand."]
   },
   {
     "topic": "website",
