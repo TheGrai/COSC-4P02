@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Home.css";
+import "./HomeCG.css";
 
-export const Home = ({ name, handleNameChange }) => {
+export const HomeCG = ({ name, handleNameChange }) => {
   const [aboutMeText, setAboutMeText] = useState("");
   const navigate = useNavigate();
 
@@ -16,25 +16,24 @@ export const Home = ({ name, handleNameChange }) => {
       return;
     }
 
-    navigate("/chat");
+    navigate("/chatCG");
   };
 
   const onSwitchClick = () => {
 
-    document.getElementById("mainApp").classList.add("AppCG");
-    document.getElementById("mainApp").classList.remove("App");
-    navigate("/homeCG");
+    document.getElementById("mainApp").classList.remove("AppCG");
+    document.getElementById("mainApp").classList.add("App");
+    navigate("/");
 
   };
 
   return (
     <div className="Home">
-        <img src = "brockuRed.png" height = "150"/>
-      <h1>Brock U Chat App</h1>
+        <img src = "niagara.png" height = "150"/>
+      <h1>Canada Games Chat App</h1>
       <h3>About</h3>
       <p>
-        This chat app is designed for BrockU Students and others to
-          ask questions about the School
+        This chat app is designed for Canada Games Attendees and others to ask questions about the Niagara 2022 Games
       </p>
       <label className="name-input-label">
         <p>Name: </p>
@@ -44,11 +43,11 @@ export const Home = ({ name, handleNameChange }) => {
           className="name-input"
         />
       </label>
-      <button onClick={onNextClick} className="next-btn">
+      <button onClick={onNextClick} className="nextCG-btn">
         Next page
       </button>
-      <button onClick={onSwitchClick} className="switchCG-btn">
-        Canada Games
+      <button onClick={onSwitchClick} className="switch-btn">
+        BrockU
       </button>
     </div>
   );

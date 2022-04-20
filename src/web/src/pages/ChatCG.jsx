@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {format} from "date-fns";
 import {CSVLink} from "react-csv";
 
-import "./Chat.css";
+import "./ChatCG.css";
 
     export function useFirstRender() {
         const firstRender = useRef(true);
@@ -16,7 +16,7 @@ import "./Chat.css";
         return firstRender.current;
     }
 
-export const Chat = ({name}) => {
+export const ChatCG = ({name}) => {
         const firstRender = useFirstRender();
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
@@ -41,7 +41,7 @@ export const Chat = ({name}) => {
                     username: name,
                     timestamp: format(new Date(), "p"),
                     ownedByCurrentUser: true,
-                    brockVer: true,
+                    brockVer: false,
                 },
             ]);
             setInput("");
@@ -61,13 +61,14 @@ export const Chat = ({name}) => {
                 username: name,
                 timestamp: format(new Date(), "p"),
                 ownedByCurrentUser: true,
-                brockVer: true,
+                brockVer: false,
+
             },
         ]);
         setInput("");
     };
 
-    const handleHomeClick = () => navigate("/");
+    const handleHomeClick = () => navigate("/homeCG");
 
     const chatRef = useRef(null);
 
@@ -129,8 +130,8 @@ export const Chat = ({name}) => {
     return (
         <div className="chat">
             <div className="header">
-                <img src = "brock.png" height = "75"/>
-                <button className="back-btn" onClick={handleHomeClick}>
+                <img src = "niagara.png" height = "75"/>
+                <button className="backCG-btn" onClick={handleHomeClick}>
                     Home
                 </button>
             </div>
@@ -150,12 +151,12 @@ export const Chat = ({name}) => {
                     onChange={onInputChange}
                     onKeyDown={onInputKeyDown}
                 />
-                <button onClick={handleSendClick} className="send-btn">
+                <button onClick={handleSendClick} className="sendCG-btn">
                     send
                 </button>
                 <CSVLink
                     data={messages}
-                    className="send-btn download-csv-btn"
+                    className="sendCG-btn download-csv-btn"
                     onClick={handleCSVClick}
                 >
                     &#8595;

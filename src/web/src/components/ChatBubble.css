@@ -12,6 +12,12 @@
   color: white;
 }
 
+.current-userCG {
+  background-color: steelblue;
+  align-self: flex-end;
+  color: white;
+}
+
 .not-current-user {
   background-color: #FFFFFF;
   align-self: flex-start;

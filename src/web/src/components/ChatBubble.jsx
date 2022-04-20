@@ -1,8 +1,16 @@
 import "./ChatBubble.css";
 
-const setBubbleColor = (ownedByCurrentUser) => {
-  const bubbleColor = ownedByCurrentUser ? "current-user" : "not-current-user";
+const setBubbleColor = (ownedByCurrentUser, brockVer) => {
+  var bubbleColor = ownedByCurrentUser ? "current-user" : "not-current-user";
+  if (ownedByCurrentUser) {
 
+      console.log(brockVer)
+
+      if (!brockVer) {
+          bubbleColor = "current-userCG";
+      }
+
+  }
   return `chat-bubble ${bubbleColor}`;
 };
 
@@ -11,8 +19,9 @@ export const ChatBubble = ({
   username,
   timestamp,
   ownedByCurrentUser,
+  brockVer,
 }) => (
-  <div className={setBubbleColor(ownedByCurrentUser)}>
+  <div className={setBubbleColor(ownedByCurrentUser, brockVer)}>
     <p>{body}</p>
     <p>{username}</p>
     <p>{timestamp}</p>

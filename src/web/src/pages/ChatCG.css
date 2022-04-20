@@ -7,27 +7,6 @@
   border-radius: 10px;
 }
 
-@media only screen and (min-width: 786px) {
-
-  .chat {
-
-      width: 100%;
-      height: 100%;
-
-  }
-
-}
-
-@media only screen and (max-width: 786px) {
-
-  .chat {
-
-    height: 100%;
-
-  }
-
-}
-
 .chat-container {
   display: flex;
   flex-direction: column;
@@ -42,9 +21,9 @@
   gap: 1rem;
 }
 
-.send-btn { 
+.sendCG-btn {
   color: white; 
-  background-color: red;
+  background-color: steelblue;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -74,9 +53,9 @@
   align-items: center;
 }
 
-.back-btn { 
+.backCG-btn {
   color: white; 
-  background-color: red;
+  background-color: steelblue;
   border: none;
   border-radius: 4px;
   cursor: pointer;
