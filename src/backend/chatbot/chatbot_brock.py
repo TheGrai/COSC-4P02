@@ -50,7 +50,10 @@ def predict_class(sentence):
 
 
 def get_response(intents_list, intents_json, message):
-    topic = intents_list[0]['intent']
+    if len(intents_list) != 0:
+        topic = intents_list[0]['intent']
+    else:
+        topic = 'unknown'
     list_of_intents = intents_json['intents']
     for i in list_of_intents:
         if i['topic'] == topic:
