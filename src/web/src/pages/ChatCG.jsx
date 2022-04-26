@@ -95,7 +95,7 @@ export const ChatCG = ({name}) => {
     useEffect(() => {
         if(!firstRender){
             const getResponse = async () => {
-                fetch(`http://localhost:2022/chat/?cg=${latestMessage}`)
+                fetch(`http://localhost:/api/?cg=${latestMessage}`)
                     .then(response => response.json())
                     .then(data => {
                             setMessages((prevMessages) => [
