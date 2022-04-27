@@ -94,7 +94,7 @@ export const Chat = ({name}) => {
     useEffect(() => {
         if(!firstRender){
             const getResponse = async () => {
-                fetch(`http://localhost:2022/chat/?brock=${latestMessage}`)
+                fetch(`http://localhost/api/?brock=${latestMessage}`)
                     .then(response => response.json())
                     .then(data => {
                             setMessages((prevMessages) => [
