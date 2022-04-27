@@ -1,5 +1,6 @@
 import {useState, useRef, useEffect} from "react";
 import {ChatBubble} from "../components/ChatBubble";
+import {Typing} from "../components/ChatTyping";
 import {useNavigate} from "react-router-dom";
 import {format} from "date-fns";
 import {CSVLink} from "react-csv";
@@ -17,11 +18,12 @@ import "./ChatCG.css";
     }
 
 export const ChatCG = ({name}) => {
-        const firstRender = useFirstRender();
+    const firstRender = useFirstRender();
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
     const [latestMessage, setLatestMessage] = useState("");
     const navigate = useNavigate();
+    const [isThinking, setIsThinking] = useState(false);
 
     const onInputChange = (e) => {
         setInput(e.target.value);
@@ -95,9 +97,11 @@ export const ChatCG = ({name}) => {
     useEffect(() => {
         if(!firstRender){
             const getResponse = async () => {
-                fetch(`http://localhost:/api/?cg=${latestMessage}`)
+                setIsThinking(true);
+                fetch(`http://localhost/api/?cg=${latestMessage}`)
                     .then(response => response.json())
                     .then(data => {
+                        setIsThinking(false);
                             setMessages((prevMessages) => [
                                 ...prevMessages,
                                 {
@@ -139,6 +143,10 @@ export const ChatCG = ({name}) => {
                 {messages.map((props) => (
                     <ChatBubble {...props} />
                 ))}
+                <div>
+                    { isThinking ? <Typing /> : null }
+                </div>
+                <br />
                 <div ref={chatRef}/>
             </div>
             <div className="input-container">
