@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   padding: 30px 30%;
-  background-color: red;
+  background-image: url(https://picsum.photos/1920/1080);
   height: 100vh;
   overflow: hidden;
 }
@@ -13,7 +13,7 @@
   flex-direction: column;
   align-items: center;
   padding: 30px 30%;
-  background-color: steelblue;
+  background-image: url(https://picsum.photos/1920/1080);
   height: 100vh;
   overflow: hidden;
 }
