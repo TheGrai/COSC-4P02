@@ -1,14 +1,11 @@
-import os
 import random
 import json
 import pickle
 import re
-
+from brockU.models import *
 import numpy as np
-
 import nltk
 from nltk.stem import WordNetLemmatizer
-
 from tensorflow.python.keras.models import load_model
 
 lemmatizer = WordNetLemmatizer()
@@ -59,20 +56,38 @@ def get_response(intents_list, intents_json, message):
         if i['topic'] == topic:
             response = random.choice(i['responses'])
             if response == "course":
-                course_regex = re.compile(r'[a-z]{4} *[0-5][a-z][0-9][0-9]')
-                course = course_regex.search(message)
-                if course is not None:
-                    response = ["course", course.group()]
-                    if re.search("term", message):
-                        response.append("term")
-                    elif re.search("who", message) or re.search("professor", message) or re.search("prof", message):
-                        response.append("teacher")
-                    elif re.search("lab", message):
-                        response.append("lab")
-                    elif re.search("prerequisite", message):
-                        response.append("prerequisite")
-                    else:
-                        response.append("about")
+                course_regex = re.compile(r'[a-zA-Z]{4} *[0-5][a-zA-z][0-9][0-9]')
+                courseID = course_regex.search(message)
+                if courseID is not None:
+                    try:
+                        course = Course.objects.get(code__iexact=courseID.group())
+
+                        if re.search("term", message):
+                            response.append("term")
+                        elif re.search("who", message) or re.search("professor", message) or re.search("prof", message):
+                            courseOfferings = CourseOffering.objects.filter(course_id=course.id)
+                            for option in courseOfferings:
+                                try:
+                                    instructor = option.instructor_id
+                                    if instructor is not None:
+                                        response = course.code + ", " + course.name + ", is run by instructor " + instructor.first_name + " " + instructor.last_name
+                                        break
+                                except Instructor.DoesNotExist:
+                                    response = "ERROR: Could not grab instructor."
+                            if response == "course":
+                                response = course.code + ", " + course.name + ", does not have an instructor."
+                        elif re.search("lab", message):
+                            response.append("lab")
+                        elif re.search("prerequisite", message):
+                            if course.prerequesites != "":
+                                response = course.code + ", " + course.name + ", has prerequisite(s) " + course.prerequesites
+                            else:
+                                response = course.code + ", " + course.name + ", does not have any prerequisites."
+
+                        else:
+                            response.append("about")
+                    except Course.DoesNotExist:
+                        response = "Hmmm, I can't seem to find information on this course."
                 else:
                     response = "∆ Please provide a valid course code"
 
