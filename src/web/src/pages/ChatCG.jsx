@@ -102,19 +102,31 @@ export const ChatCG = ({name}) => {
                     .then(response => response.json())
                     .then(data => {
                         setIsThinking(false);
-                            setMessages((prevMessages) => [
-                                ...prevMessages,
-                                {
-                                    body: data.message,
-                                    username: 'Dr. Bot',
-                                    timestamp: format(new Date(), "p"),
-                                    ownedByCurrentUser: false,
-                                    brockVer: false,
-                                },
-                            ]);
-                            console.log(data.message);
-                        }
-                    );
+                        setMessages((prevMessages) => [
+                            ...prevMessages,
+                            {
+                                body: data.message,
+                                username: 'Dr. Bot',
+                                timestamp: format(new Date(), "p"),
+                                ownedByCurrentUser: false,
+                                brockVer: false,
+                            },
+                        ]);
+                    })
+                    .catch(error => {
+                        setIsThinking(false);
+                        setMessages((prevMessages) => [
+                            ...prevMessages,
+                            {
+                                body: "ERROR: Unable to process your request. Please Try Again Later.",
+                                username: 'Dr. Bot',
+                                timestamp: format(new Date(), "p"),
+                                ownedByCurrentUser: false,
+                                brockVer: false,
+                            },
+                        ]);
+                        console.error('Error:', error);
+                    });
             }
             getResponse();
 
