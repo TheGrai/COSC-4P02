@@ -132,7 +132,7 @@ def get_response(intents_list, intents_json, message):
             elif i['context_set'] == "exam":
                 try:
                     course = Course.objects.get(code__iexact=courseID.group())
-                    exams = Exam.object.filter(course_id=course.id)
+                    exams = Exam.objects.filter(course=course.id)
                     if topic == "about":
                         response = ""
                         for exam in exams:
