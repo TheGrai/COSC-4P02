@@ -122,19 +122,19 @@
     "context_set": "course"
   },
   {
-    "topic": "about exam",
+    "topic": "about",
     "patterns": ["Tell me about the ......... exam", "when is the exam", "what time is the exam", "where is the exam", "when is my exam"],
     "responses": ["exam"],
     "context_set": "exam"
   },
   {
-    "topic": "where exam",
+    "topic": "where",
     "patterns": [ "where is the exam", "what room is my exam", "where do I take my exam"],
     "responses": ["exam"],
     "context_set": "exam"
   },
   {
-    "topic": "when exam",
+    "topic": "when",
     "patterns": ["when is the exam", "what time is the exam", "when is my exam"],
     "responses": ["exam"],
     "context_set": "exam"
