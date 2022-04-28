@@ -59,20 +59,51 @@ def get_response(intents_list, intents_json, message):
         if i['topic'] == topic:
             response = random.choice(i['responses'])
             if response == "course":
-                course_regex = re.compile(r'[a-z]{4} *[0-5][a-z][0-9][0-9]')
-                course = course_regex.search(message)
-                if course is not None:
-                    response = ["course", course.group()]
-                    if re.search("term", message):
-                        response.append("term")
-                    elif re.search("who", message) or re.search("professor", message) or re.search("prof", message):
-                        response.append("teacher")
-                    elif re.search("lab", message):
-                        response.append("lab")
-                    elif re.search("prerequisite", message):
-                        response.append("prerequisite")
-                    else:
-                        response.append("about")
+                course_regex = re.compile(r'[a-zA-Z]{4} *[0-5][a-zA-z][0-9][0-9]')
+                courseID = course_regex.search(message)
+                if courseID is not None:
+                    try:
+                        course = Course.objects.get(code__iexact=courseID.group())
+
+                        if re.search("term", message):
+                            response.append("term")
+                        elif re.search("who", message) or re.search("professor", message) or re.search("prof", message):
+                            courseOfferings = CourseOffering.objects.filter(course_id=course.id)
+                            for option in courseOfferings:
+                                if option.instructor_id is not None:
+                                    try:
+                                        instructor = Instructor.objects.get(id=option.instructor_id)
+                                        response = course.code + ", " + course.name + ", is run by instructor " + instructor.first_name + " " + instructor.last_name
+                                    except:
+                                        response = "ERROR: Could not grab instructor. "
+                                    break
+                        elif re.search("lab", message):
+                            labOfferings = CourseOffering.objects.filter(delivery_type=CourseOffering.DeliveryType.LABORATORY)
+                            courseOfferings = labOfferings.filter(course_id=course.id)
+                            gen = False
+                            response = course.code + " - " + course.name + " has "
+                            for option in courseOfferings:
+                                    gen = True
+                                    schedule = option.schedule
+                                    response += " Lab " + str(option.section) + " that runs "
+                                    for key, value in schedule.items():
+                                        print(key + " " + value)
+                                        response += (key + " " + value)
+                                    if option.location is not None:
+                                        response += " located at " + option.location + "."
+                            if not gen:
+                                response = "There are no labs for the requested course " + course.code
+
+                        elif re.search("prerequisite", message):
+                            if course.prerequesites != "":
+                                response = course.code + ", " + course.name + ", has prerequisite(s) " + course.prerequesites
+                            else:
+                                response = course.code + ", " + course.name + ", does not have any prerequisites."
+
+                        else:
+                            response.append("about")
+                    except Course.DoesNotExist:
+                        response = "Hmmm, I can't seem to find information on this course."
                 else:
                     response = "∆ Please provide a valid course code"
 
