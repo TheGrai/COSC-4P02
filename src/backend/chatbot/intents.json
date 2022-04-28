@@ -20,7 +20,8 @@
   {
     "topic": "unknown",
     "patterns": [],
-    "responses": ["Sorry, I do not understand what you are saying. Please try and rephrase your question and so I can better understand.", "Sorry, that didn't really make sense to me. Please try and rephrase your question and so I can better understand."]
+    "responses": ["Sorry, I do not understand what you are saying. Please try and rephrase your question and so I can better understand.", "Sorry, that didn't really make sense to me. Please try and rephrase your question and so I can better understand."],
+    "context_set": ""
   },
   {
     "topic": "website",
@@ -105,6 +106,12 @@
   {
     "topic": "lab",
     "patterns": ["What are the lab options for", "when is the lab", "lab options", "lab"],
+    "responses": ["course"],
+    "context_set": "course"
+  },
+  {
+    "topic": "seminar",
+    "patterns": ["What are the seminar options for", "when is the seminar", "seminar options", "seminar", "sem"],
     "responses": ["course"],
     "context_set": "course"
   },

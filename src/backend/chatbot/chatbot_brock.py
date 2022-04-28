@@ -88,14 +88,36 @@ def get_response(intents_list, intents_json, message):
                             for option in courseOfferings:
                                     gen = True
                                     schedule = option.schedule
-                                    response += " Lab " + str(option.section) + " that runs "
-                                    for key, value in schedule.items():
-                                        print(key + " " + value)
-                                        response += (key + " " + value)
-                                    if option.location is not None:
-                                        response += " located at " + option.location + "."
+                                    response += " Lab " + str(option.section)
+                                    if schedule.items():
+                                        response += " that runs "
+                                        for key, value in schedule.items():
+                                            print(key + " " + value)
+                                            response += (key + " " + value)
+                                    if option.location != '':
+                                        response += " located at " + option.location
+                                    response += "."
                             if not gen:
                                 response = "There are no labs for the requested course " + course.code
+                        elif topic == "seminar":
+                            labOfferings = CourseOffering.objects.filter(delivery_type=CourseOffering.DeliveryType.SEMINAR)
+                            courseOfferings = labOfferings.filter(course_id=course.id)
+                            gen = False
+                            response = course.code + " - " + course.name + " has "
+                            for option in courseOfferings:
+                                    gen = True
+                                    schedule = option.schedule
+                                    response += " Seminar " + str(option.section)
+                                    if schedule.items():
+                                        response += " that runs "
+                                        for key, value in schedule.items():
+                                            print(key + " " + value)
+                                            response += (key + " " + value)
+                                    if option.location != '':
+                                        response += " located at " + option.location
+                                    response += "."
+                            if not gen:
+                                response = "There are no seminars for the requested course " + course.code
                         elif topic == "prerequisite":
                             if course.prerequesites != "":
                                 response = course.code + ", " + course.name + ", has prerequisite(s) " + course.prerequesites
