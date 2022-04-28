@@ -2,7 +2,7 @@ from django.contrib import admin
 from import_export import fields, resources
 from import_export.admin import ImportExportModelAdmin
 from import_export.widgets import ForeignKeyWidget, JSONWidget
-from .models import Subject, Course, CourseOffering, Instructor
+from .models import *
 
 # Register your models here.
 class SubjectResource(resources.ModelResource):
@@ -59,3 +59,18 @@ class CourseComponentAdmin(ImportExportModelAdmin):
     resource_class = CourseOfferingResource
 
 admin.site.register(CourseOffering, CourseComponentAdmin)
+
+class ExamResource(resources.ModelResource):
+    course = fields.Field(
+        column_name='code',
+        attribute='course',
+        widget=ForeignKeyWidget(Course, field='code')
+    )
+    class Meta:
+        model = Exam
+        exclude = ('code', )
+
+class ExamComponentAdmin(ImportExportModelAdmin):
+    resource_class = ExamResource
+
+admin.site.register(Exam, ExamComponentAdmin)
