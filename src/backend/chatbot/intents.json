@@ -58,7 +58,7 @@
   },
   {
     "topic": "transportation",
-    "patterns": ["What transportation options are available", "transportation", "how do I get to", "How do i get around", "how do I get to school", "is there a bus", "do I have to drive"],
+    "patterns": ["What transportation options are available", "transportation", "how do I get to", "How do i get around", "how do I get to school", "is there a bus", "do I have to drive", "how do I get around"],
     "responses": ["Niagara Region Transit information is available here https://www.niagararegion.ca/transit/"]
   },
   {
@@ -86,55 +86,55 @@
     "context_set": ""
   },
   {
-    "topic": "about",
-    "patterns": ["Tell me about", "What is ......... about"],
+    "topic": "aboutCourse",
+    "patterns": ["Tell me about", "What is ......... about", "about ........."],
     "responses": ["course"],
     "context_set": "course"
   },
   {
-    "topic": "when",
+    "topic": "whenCourse",
     "patterns": ["What term is", "When does", "What month does", "start date for", "end date for"],
     "responses": ["course"],
     "context_set": "course"
   },
   {
-    "topic": "instructor",
+    "topic": "instructorCourse",
     "patterns": ["Who teaches", "who is the prof", "prof for", "prof"],
     "responses": ["course"],
     "context_set": "course"
   },
   {
-    "topic": "lab",
+    "topic": "labCourse",
     "patterns": ["What are the lab options for", "when is the lab", "lab options", "lab"],
     "responses": ["course"],
     "context_set": "course"
   },
   {
-    "topic": "seminar",
+    "topic": "seminarCourse",
     "patterns": ["What are the seminar options for", "when is the seminar", "seminar options", "seminar", "sem"],
     "responses": ["course"],
     "context_set": "course"
   },
   {
-    "topic": "prerequisite",
+    "topic": "prerequisiteCourse",
     "patterns": ["What are the prerequisites for", "prerequisites for", "Are there any prerequisites for"],
     "responses": ["course"],
     "context_set": "course"
   },
   {
-    "topic": "about",
-    "patterns": ["Tell me about the ......... exam", "when is the exam", "what time is the exam", "where is the exam", "when is my exam"],
+    "topic": "aboutExam",
+    "patterns": ["Tell me about the ......... exam", "about my exam", "everything about my exam", "tell me about my exam"],
     "responses": ["exam"],
     "context_set": "exam"
   },
   {
-    "topic": "where",
+    "topic": "whereExam",
     "patterns": [ "where is the exam", "what room is my exam", "where do I take my exam"],
     "responses": ["exam"],
     "context_set": "exam"
   },
   {
-    "topic": "when",
+    "topic": "whenExam",
     "patterns": ["when is the exam", "what time is the exam", "when is my exam"],
     "responses": ["exam"],
     "context_set": "exam"

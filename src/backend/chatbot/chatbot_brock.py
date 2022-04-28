@@ -44,6 +44,8 @@ def predict_class(sentence):
     return_list = []
     for r in results:
         return_list.append({'intent': classes[r[0]], 'probability': str(r[1])})
+
+    print (return_list)
     return return_list
 
 
@@ -61,15 +63,15 @@ def get_response(intents_list, intents_json, message):
                 if courseID is not None:
                     try:
                         course = Course.objects.get(code__iexact=courseID.group())
-                        if topic == "about":
+                        if topic == "aboutCourse":
                             if course.description != "":
                                 response = course.code + ", " + course.name + ", is a course that can be described as " + course.description
                             else:
                                 response = course.code + ", " + course.name + ", does not have a description."
-                        if topic == "when":
+                        if topic == "whenCourse":
                             courseOfferings = CourseOffering.objects.filter(course_id=course.id)
                             response = course.code + ", " + course.name + ", runs from " + courseOfferings[0].start_date.strftime("%B %d %Y") + " to " + courseOfferings[0].end_date.strftime("%B %d %Y")
-                        elif topic == "instructor":
+                        elif topic == "instructorCourse":
                             courseOfferings = CourseOffering.objects.filter(course_id=course.id)
                             for option in courseOfferings:
                                 try:
@@ -81,7 +83,7 @@ def get_response(intents_list, intents_json, message):
                                     response = "ERROR: Could not grab instructor."
                             if response == "course":
                                 response = course.code + ", " + course.name + ", does not have an instructor."
-                        elif topic == "lab":
+                        elif topic == "labCourse":
                             labOfferings = CourseOffering.objects.filter(delivery_type=CourseOffering.DeliveryType.LABORATORY)
                             courseOfferings = labOfferings.filter(course_id=course.id)
                             gen = False
@@ -100,7 +102,7 @@ def get_response(intents_list, intents_json, message):
                                     response += "."
                             if not gen:
                                 response = "There are no labs for the requested course " + course.code
-                        elif topic == "seminar":
+                        elif topic == "seminarCourse":
                             labOfferings = CourseOffering.objects.filter(delivery_type=CourseOffering.DeliveryType.SEMINAR)
                             courseOfferings = labOfferings.filter(course_id=course.id)
                             gen = False
@@ -119,7 +121,7 @@ def get_response(intents_list, intents_json, message):
                                     response += "."
                             if not gen:
                                 response = "There are no seminars for the requested course " + course.code
-                        elif topic == "prerequisite":
+                        elif topic == "prerequisiteCourse":
                             if course.prerequesites != "":
                                 response = course.code + ", " + course.name + ", has prerequisite(s) " + course.prerequesites
                             else:
@@ -130,22 +132,22 @@ def get_response(intents_list, intents_json, message):
                     response = "∆ Please provide a valid course code"
 
             elif i['context_set'] == "exam":
+                course_regex = re.compile(r'[a-zA-Z]{4} *[0-5][a-zA-z][0-9][0-9]')
+                courseID = course_regex.search(message)
+                response = ""
                 try:
                     course = Course.objects.get(code__iexact=courseID.group())
                     exams = Exam.objects.filter(course=course.id)
-                    if topic == "about":
-                        response = ""
+                    if topic == "aboutExam":
                         for exam in exams:
-                            response += exam.code + " section " + exam.section +"'s exam will be taking place at " + exam.location + " on " + exam.date.strftime("%B %d %Y") + " at " + exam.start_time + "."
-                    elif topic == "where":
-                        response = ""
+                            response += course.code + " section " + str(exam.section) +"'s exam will be taking place at " + exam.location + " on " + exam.date.strftime("%B %d %Y") + " at " + exam.time + ". "
+                    elif topic == "whereExam":
                         for exam in exams:
-                            response += exam.code + " section " + exam.section + "'s exam will be taking place at " + exam.location
-                    elif topic == "when":
-                        response = ""
+                            response += course.code + " section " + str(exam.section) + "'s exam will be taking place at " + exam.location + ". "
+                    elif topic == "whenExam":
                         for exam in exams:
-                            response += exam.code + " section " + exam.section + "'s exam will be taking place on " + exam.date.strftime("%B %d %Y") + " at " + exam.start_time + "."
-                except Exam.DoesNotExist:
+                            response += course.code + " section " + str(exam.section) + "'s exam will be taking place on " + exam.date.strftime("%B %d %Y") + " at " + exam.time + ". "
+                except Course.DoesNotExist:
                     response = "Hmmm, I can't seem to find information on this course exam. You can access the exam timetable here: https://www.brocku.ca/guides-and-timetables/exams/"
 
             elif topic == "program":
