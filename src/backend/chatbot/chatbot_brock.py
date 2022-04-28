@@ -7,6 +7,7 @@ import numpy as np
 import nltk
 from nltk.stem import WordNetLemmatizer
 from tensorflow.python.keras.models import load_model
+from difflib import SequenceMatcher
 
 lemmatizer = WordNetLemmatizer()
 intents = json.loads(open('chatbot/intents.json', errors="ignore").read())
@@ -148,13 +149,29 @@ def get_response(intents_list, intents_json, message):
                     response = "Hmmm, I can't seem to find information on this course exam. You can access the exam timetable here: https://www.brocku.ca/guides-and-timetables/exams/"
 
             elif topic == "program":
-                program_regex = re.compile(r'[a-z]* program')
-                program = program_regex.search(message)
-                if program is not None:
-                    #query for program under subject
-                    response  = "The " + program + " program at Brock University was found. It can be described as: " + subject.description + " More information about the program can be found here: " + subject.url
+                subjectOfferings = Subject.objects.all()
+                possibleSubjects = []
+                bestSub = ""
+                for subject in subjectOfferings:
+                    lowerName = subject.name.lower()
+                    substrings = lowerName.split()
+                    lowerMessage = message.lower()
+                    if any(substring in lowerMessage for substring in substrings):
+                        possibleSubjects.append(subject)
+                        bestSub = subject
+                        #response = "The " + subject.name + " program at Brock University was found. It can be described as: " + subject.description + " More information about the program can be found here: " + subject.url
+                    else:
+                        response = "The program you were asking about at Brock University was not found. Perhaps it is under a different name. You can try to find it here: https://brocku.ca/webcal/"
+
+                print(possibleSubjects)
+
+                if bestSub is not "":
+                    for pSub in possibleSubjects:
+                            if SequenceMatcher(None, pSub.name, message).ratio() > SequenceMatcher(None, bestSub.name, message).ratio():
+                                bestSub = pSub
+                    response = "The " + bestSub.name + " program at Brock University was found. It can be described as: " + bestSub.description + " More information about the program can be found here: " + bestSub.url
                 else:
-                    response = "The " + program + " program at Brock University was not found. Perhaps it is under a different name. You can try to find it here: https://brocku.ca/webcal/"
+                    response = "Hmmm. I could not find anything about the program you are asking for. Perhaps it is under a different name. You can try to find it here: https://brocku.ca/webcal/"
 
             else:
                 response = random.choice(i['responses'])
