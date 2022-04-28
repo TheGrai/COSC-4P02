@@ -7,6 +7,7 @@ import numpy as np
 import nltk
 from nltk.stem import WordNetLemmatizer
 from tensorflow.python.keras.models import load_model
+from difflib import SequenceMatcher
 
 lemmatizer = WordNetLemmatizer()
 intents = json.loads(open('chatbot/intents.json', errors="ignore").read())
@@ -128,31 +129,47 @@ def get_response(intents_list, intents_json, message):
                 else:
                     response = "∆ Please provide a valid course code"
 
-            elif topic == "exam":
-                course_regex = re.compile(r'[a-z]{4} *[0-5][a-z][0-9][0-9]')
-                course = course_regex.search(message)
-                if course is not None:
-                    response = ["exam", course.group()]
-                    if re.search("when", message) or re.search("time", message):
-                        response.append("time")
-                    elif re.search("where", message) or re.search("location", message):
-                        response.append("location")
-                    else:
-                        response.append("about")
-                else:
-                    response = "∆ Please provide a valid course code"
+            elif i['context_set'] == "exam":
+                try:
+                    course = Course.objects.get(code__iexact=courseID.group())
+                    exams = Exam.objects.filter(course=course.id)
+                    if topic == "about":
+                        response = ""
+                        for exam in exams:
+                            response += exam.code + " section " + exam.section +"'s exam will be taking place at " + exam.location + " on " + exam.date.strftime("%B %d %Y") + " at " + exam.start_time + "."
+                    elif topic == "where":
+                        response = ""
+                        for exam in exams:
+                            response += exam.code + " section " + exam.section + "'s exam will be taking place at " + exam.location
+                    elif topic == "when":
+                        response = ""
+                        for exam in exams:
+                            response += exam.code + " section " + exam.section + "'s exam will be taking place on " + exam.date.strftime("%B %d %Y") + " at " + exam.start_time + "."
+                except Exam.DoesNotExist:
+                    response = "Hmmm, I can't seem to find information on this course exam. You can access the exam timetable here: https://www.brocku.ca/guides-and-timetables/exams/"
 
             elif topic == "program":
-                program_regex = re.compile(r'[a-z]* program')
-                program = program_regex.search(message)
-                if program is not None:
-                    response = ["program", program.group()]
-                    if re.search("requirement", message) or re.search("get into", message):
-                        response.append("requirement")
+                subjectOfferings = Subject.objects.all()
+                possibleSubjects = []
+                bestSub = ""
+                for subject in subjectOfferings:
+                    lowerName = subject.name.lower()
+                    substrings = lowerName.split()
+                    lowerMessage = message.lower()
+                    if any(substring in lowerMessage for substring in substrings):
+                        possibleSubjects.append(subject)
+                        bestSub = subject
+                        #response = "The " + subject.name + " program at Brock University was found. It can be described as: " + subject.description + " More information about the program can be found here: " + subject.url
                     else:
-                        response.append("about")
+                        response = "The program you were asking about at Brock University was not found. Perhaps it is under a different name. You can try to find it here: https://brocku.ca/webcal/"
+
+                if bestSub is not "":
+                    for pSub in possibleSubjects:
+                            if SequenceMatcher(None, pSub.name, message).ratio() > SequenceMatcher(None, bestSub.name, message).ratio():
+                                bestSub = pSub
+                    response = "The " + bestSub.name + " program at Brock University was found. It can be described as: " + bestSub.description + " More information about the program can be found here: " + bestSub.url
                 else:
-                    response = "∆ Please provide a better question about the program"
+                    response = "Hmmm. I could not find anything about the program you are asking for. Perhaps it is under a different name. You can try to find it here: https://brocku.ca/webcal/"
 
             else:
                 response = random.choice(i['responses'])
