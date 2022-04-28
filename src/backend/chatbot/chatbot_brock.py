@@ -128,19 +128,24 @@ def get_response(intents_list, intents_json, message):
                 else:
                     response = "∆ Please provide a valid course code"
 
-            elif topic == "exam":
-                course_regex = re.compile(r'[a-z]{4} *[0-5][a-z][0-9][0-9]')
-                course = course_regex.search(message)
-                if course is not None:
-                    response = ["exam", course.group()]
-                    if re.search("when", message) or re.search("time", message):
-                        response.append("time")
-                    elif re.search("where", message) or re.search("location", message):
-                        response.append("location")
-                    else:
-                        response.append("about")
-                else:
-                    response = "∆ Please provide a valid course code"
+            elif i['context_set'] == "exam":
+                try:
+                    course = Course.objects.get(code__iexact=courseID.group())
+                    exams = Exam.object.filter(course_id=course.id)
+                    if topic == "about exam":
+                        response = ""
+                        for exam in exams:
+                            response += exam.code + " section " + exam.section +"'s exam will be taking place at " + exam.location + " on " + exam.date.strftime("%B %d %Y") + " at " + exam.start_time + "."
+                    elif topic == "where exam":
+                        response = ""
+                        for exam in exams:
+                            response += exam.code + " section " + exam.section + "'s exam will be taking place at " + exam.location
+                    elif topic == "when exam":
+                        response = ""
+                        for exam in exams:
+                            response += exam.code + " section " + exam.section + "'s exam will be taking place on " exam.date.strftime("%B %d %Y") + " at " + exam.start_time + "."
+                except Course.DoesNotExist:
+                    response = "Hmmm, I can't seem to find information on this course exam. You can access the exam timetable here: https://www.brocku.ca/guides-and-timetables/exams/"
 
             elif topic == "program":
                 program_regex = re.compile(r'[a-z]* program')
