@@ -143,7 +143,7 @@ def get_response(intents_list, intents_json, message):
                     elif topic == "when exam":
                         response = ""
                         for exam in exams:
-                            response += exam.code + " section " + exam.section + "'s exam will be taking place on " exam.date.strftime("%B %d %Y") + " at " + exam.start_time + "."
+                            response += exam.code + " section " + exam.section + "'s exam will be taking place on " + exam.date.strftime("%B %d %Y") + " at " + exam.start_time + "."
                 except Course.DoesNotExist:
                     response = "Hmmm, I can't seem to find information on this course exam. You can access the exam timetable here: https://www.brocku.ca/guides-and-timetables/exams/"
 
