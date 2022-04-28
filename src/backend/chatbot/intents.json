@@ -59,7 +59,8 @@
   {
     "topic": "transportation",
     "patterns": ["What transportation options are available", "transportation", "how do I get to", "How do i get around", "how do I get to school", "is there a bus", "do I have to drive", "how do I get around"],
-    "responses": ["Niagara Region Transit information is available here https://www.niagararegion.ca/transit/"]
+    "responses": ["Niagara Region Transit information is available here https://www.niagararegion.ca/transit/"],
+    "context_set": ""
   },
   {
     "topic": "transit app",
