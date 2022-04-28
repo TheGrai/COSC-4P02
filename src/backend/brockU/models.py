@@ -8,6 +8,7 @@ class Subject(models.Model):
     code = models.CharField(max_length=4, unique=True)
     name = models.CharField(max_length=64)
     url = models.URLField(blank=True)
+    description = models.TextField(blank=True)
 
 class Instructor(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
