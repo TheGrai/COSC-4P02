@@ -85,7 +85,10 @@ def get_response(intents_list, intents_json, message):
                                 response = course.code + ", " + course.name + ", does not have any prerequisites."
 
                         else:
-                            response.append("about")
+                            if course.description != "":
+                                response = course.code + ", " + course.name + ", is a course that can be described as " + course.description
+                            else:
+                                response = course.code + ", " + course.name + ", does not have a description."
                     except Course.DoesNotExist:
                         response = "Hmmm, I can't seem to find information on this course."
                 else:
