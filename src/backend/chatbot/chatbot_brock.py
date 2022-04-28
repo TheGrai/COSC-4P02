@@ -63,7 +63,9 @@ def get_response(intents_list, intents_json, message):
                         course = Course.objects.get(code__iexact=courseID.group())
 
                         if re.search("term", message):
-                            response.append("term")
+                            courseOfferings = CourseOffering.objects.filter(course_id=course.id)
+                            response = course.code + ", " + course.name + ", runs from " + courseOfferings[0].start_date.strftime("%B %d %Y") + " to " + courseOfferings[0].end_date.strftime("%B %d %Y")
+
                         elif re.search("who", message) or re.search("professor", message) or re.search("prof", message):
                             courseOfferings = CourseOffering.objects.filter(course_id=course.id)
                             for option in courseOfferings:
