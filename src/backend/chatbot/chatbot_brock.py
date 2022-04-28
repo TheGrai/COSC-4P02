@@ -54,19 +54,21 @@ def get_response(intents_list, intents_json, message):
     list_of_intents = intents_json['intents']
     for i in list_of_intents:
         if i['topic'] == topic:
-            response = random.choice(i['responses'])
-            if response == "course":
+            if i['context_set'] == "course":
                 course_regex = re.compile(r'[a-zA-Z]{4} *[0-5][a-zA-z][0-9][0-9]')
                 courseID = course_regex.search(message)
                 if courseID is not None:
                     try:
                         course = Course.objects.get(code__iexact=courseID.group())
-
-                        if re.search("term", message):
+                        if topic == "about":
+                            if course.description != "":
+                                response = course.code + ", " + course.name + ", is a course that can be described as " + course.description
+                            else:
+                                response = course.code + ", " + course.name + ", does not have a description."
+                        if topic == "when":
                             courseOfferings = CourseOffering.objects.filter(course_id=course.id)
                             response = course.code + ", " + course.name + ", runs from " + courseOfferings[0].start_date.strftime("%B %d %Y") + " to " + courseOfferings[0].end_date.strftime("%B %d %Y")
-
-                        elif re.search("who", message) or re.search("professor", message) or re.search("prof", message):
+                        elif topic == "instructor":
                             courseOfferings = CourseOffering.objects.filter(course_id=course.id)
                             for option in courseOfferings:
                                 try:
@@ -78,25 +80,19 @@ def get_response(intents_list, intents_json, message):
                                     response = "ERROR: Could not grab instructor."
                             if response == "course":
                                 response = course.code + ", " + course.name + ", does not have an instructor."
-                        elif re.search("lab", message):
+                        elif topic == "lab":
                             response.append("lab")
-                        elif re.search("prerequisite", message):
+                        elif topic == "prerequisite":
                             if course.prerequesites != "":
                                 response = course.code + ", " + course.name + ", has prerequisite(s) " + course.prerequesites
                             else:
                                 response = course.code + ", " + course.name + ", does not have any prerequisites."
-
-                        else:
-                            if course.description != "":
-                                response = course.code + ", " + course.name + ", is a course that can be described as " + course.description
-                            else:
-                                response = course.code + ", " + course.name + ", does not have a description."
                     except Course.DoesNotExist:
                         response = "Hmmm, I can't seem to find information on this course."
                 else:
                     response = "∆ Please provide a valid course code"
 
-            elif response == "exam":
+            elif topic == "exam":
                 course_regex = re.compile(r'[a-z]{4} *[0-5][a-z][0-9][0-9]')
                 course = course_regex.search(message)
                 if course is not None:
@@ -110,7 +106,7 @@ def get_response(intents_list, intents_json, message):
                 else:
                     response = "∆ Please provide a valid course code"
 
-            elif response == "program":
+            elif topic == "program":
                 program_regex = re.compile(r'[a-z]* program')
                 program = program_regex.search(message)
                 if program is not None:
@@ -122,6 +118,8 @@ def get_response(intents_list, intents_json, message):
                 else:
                     response = "∆ Please provide a better question about the program"
 
+            else:
+                response = random.choice(i['responses'])
             return response
 
 

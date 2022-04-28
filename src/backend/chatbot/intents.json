@@ -2,17 +2,20 @@
   {
     "topic": "greeting",
     "patterns": ["hi", "hello", "hi", "hey", "greetings", "good day", "hello", "hallo", "nice to meet you", "waddup", "whats up", "waddup"],
-    "responses": ["Hi, I am the Brock Chat bot, how may I help you?"]
+    "responses": ["Hi, I am the Brock Chat bot, how may I help you?"],
+    "context_set": ""
   },
   {
     "topic": "goodbye",
     "patterns": ["bye", "goodbye", "cya", "see you later", "i am leaving", "good day", "see ya", "bye bye", "till next time", "have a nice day", "later"],
-    "responses": ["Bye!", "Goodbye!"]
+    "responses": ["Bye!", "Goodbye!"],
+    "context_set": ""
   },
   {
     "topic": "thanks",
     "patterns": ["thanks", "thank you", "that helped", "that's helpful", "that was helpful", "thanks for the help"],
-    "responses": ["You are welcome!", "My pleasure!", "Happy to help!", "Any time!"]
+    "responses": ["You are welcome!", "My pleasure!", "Happy to help!", "Any time!"],
+    "context_set": ""
   },
   {
     "topic": "unknown",
@@ -22,30 +25,35 @@
   {
     "topic": "website",
     "patterns": ["What is Brock University Website", "website", "Do you have a website", "whats the site", "site", "where do I find information", "information site"],
-    "responses": ["The Brock University website is https://www.brocku.ca"]
+    "responses": ["The Brock University website is https://www.brocku.ca"],
+    "context_set": ""
   },
   {
     "topic": "news",
     "patterns": ["What's new at Brock University", "News", "anything new", "is there any news", "whats the news", "brock news", "news at the school"],
-    "responses": ["Brock University news can be found at https://brocku.ca/brock-news/"]
+    "responses": ["Brock University news can be found at https://brocku.ca/brock-news/"],
+    "context_set": ""
   },
   {
     "topic": "covid",
     "patterns": ["Covid news at Brock University", "brock covid", "brock vaccine", "brock covid-19", "brock corona virus", "brock restrictions", "brock masks",
       "do I need to wear a mask at school", "do I need to wear a mask", "mask", "masks", "do we need to wear masks", "vaccine", "how many doses", "do I need my second shot"
     , "do I need my vaccine", "how many vaccines do i need", "how many shots do I need"],
-    "responses": ["Brock University COVID-19 news can be found at https://www.brocku.ca/coronavirus/"]
+    "responses": ["Brock University COVID-19 news can be found at https://www.brocku.ca/coronavirus/"],
+    "context_set": ""
   },
   {
     "topic": "about",
     "patterns": ["Tell me about Brock University", "Brock University", "what is brock university", "tell me about brock", "about brock", "tell me about the university", "about the school", "tell me about the school"],
-    "responses": ["Brock University about page can be found at https://www.brocku.ca/about/"]
+    "responses": ["Brock University about page can be found at https://www.brocku.ca/about/"],
+    "context_set": "brock"
   },
   {
     "topic": "important dates",
     "patterns": ["Tell me about Brock University Important Dates", "important dates", "what are the important dates", "any dates I should know", "when do I move in", "when does school start", "when do lectures start",
       "when is reading week", "when does class end", "when is my last lecture", "When can I move in", "when do I move out"],
-    "responses": ["Brock University Important Dates page can be found at https://www.brocku.ca/important-dates"]
+    "responses": ["Brock University Important Dates page can be found at https://www.brocku.ca/important-dates"],
+    "context_set": ""
   },
   {
     "topic": "transportation",
@@ -55,39 +63,68 @@
   {
     "topic": "transit app",
     "patterns": ["Is there an app for the buses", "bus app", "app"],
-    "responses": ["The Niagara Region Transit app for both Android and iOS is available here https://www.transitapp.com/"]
+    "responses": ["The Niagara Region Transit app for both Android and iOS is available here https://www.transitapp.com/"],
+    "context_set": ""
   },
   {
-    "topic": "niagara do",
+    "topic": "do",
     "patterns": ["What can you do in the Niagara region", "can do", "cool attractions", "what can I do in the area", "what is there to do", "is there more to the falls", "is there a casino"],
-    "responses": ["The Niagara Falls Tourism website provided here https://www.niagarafallstourism.com/play/ has information about what you can see and do in the region"]
+    "responses": ["The Niagara Falls Tourism website provided here https://www.niagarafallstourism.com/play/ has information about what you can see and do in the region"],
+    "context_set": "niagara"
   },
   {
-    "topic": "niagara stay",
+    "topic": "stay",
     "patterns": ["Where can I stay in the Niagara region", "stay", "hotel", "live", "sleep"],
-    "responses": ["The Niagara Falls Tourism website provided here https://www.niagarafallstourism.com/sleep/ has information about accommodations in Niagara Region"]
+    "responses": ["The Niagara Falls Tourism website provided here https://www.niagarafallstourism.com/sleep/ has information about accommodations in Niagara Region"],
+    "context_set": ""
   },
   {
     "topic": "niagara covid",
     "patterns": ["What are the COVID-19 restrictions like in Niagara", "niagara covid", "niagara restrictions", "niagara masks", "niagara masks", "niagara vaccine"],
-    "responses": ["The Niagara region COVID-19 information can be found here https://www.niagararegion.ca/health/covid-19/"]
+    "responses": ["The Niagara region COVID-19 information can be found here https://www.niagararegion.ca/health/covid-19/"],
+    "context_set": ""
   },
-
   {
-    "topic": "course",
-    "patterns": ["Tell me about", "What term is", "Who teaches",
-      "What are the lab options for", "What are the prerequisites for", "prerequisites for", "when is the lab", "lab options", "lab", "who is the prof", "prof for"],
-    "responses": ["course"]
+    "topic": "about",
+    "patterns": ["Tell me about", "What is ......... about"],
+    "responses": ["course"],
+    "context_set": "course"
+  },
+  {
+    "topic": "when",
+    "patterns": ["What term is", "When does", "What month does", "start date for", "end date for"],
+    "responses": ["course"],
+    "context_set": "course"
+  },
+  {
+    "topic": "instructor",
+    "patterns": ["Who teaches", "who is the prof", "prof for", "prof"],
+    "responses": ["course"],
+    "context_set": "course"
+  },
+  {
+    "topic": "lab",
+    "patterns": ["What are the lab options for", "when is the lab", "lab options", "lab"],
+    "responses": ["course"],
+    "context_set": "course"
+  },
+  {
+    "topic": "prerequisite",
+    "patterns": ["What are the prerequisites for", "prerequisites for", "Are there any prerequisites for"],
+    "responses": ["course"],
+    "context_set": "course"
   },
   {
     "topic": "exam",
     "patterns": ["Tell me about the exam", "when is the exam", "what time is the exam", "where is the exam", "when is my exam"],
-    "responses": ["exam"]
+    "responses": ["exam"],
+    "context_set": ""
   },
   {
     "topic": "program",
     "patterns": ["Tell me about the program", "program requirements", "program", "about the program", "do you have a program", "what is the program", "requirement", "program requirement"
     , "what are the requirements for"],
-    "responses": ["program"]
+    "responses": ["program"],
+    "context_set": ""
   }
 ]}
