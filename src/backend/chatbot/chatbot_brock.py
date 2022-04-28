@@ -1,15 +1,11 @@
-import os
 import random
 import json
 import pickle
 import re
 from brockU.models import *
-
 import numpy as np
-
 import nltk
 from nltk.stem import WordNetLemmatizer
-
 from tensorflow.python.keras.models import load_model
 
 lemmatizer = WordNetLemmatizer()
@@ -71,13 +67,15 @@ def get_response(intents_list, intents_json, message):
                         elif re.search("who", message) or re.search("professor", message) or re.search("prof", message):
                             courseOfferings = CourseOffering.objects.filter(course_id=course.id)
                             for option in courseOfferings:
-                                if option.instructor_id is not None:
-                                    try:
-                                        instructor = Instructor.objects.get(id=option.instructor_id)
+                                try:
+                                    instructor = option.instructor_id
+                                    if instructor is not None:
                                         response = course.code + ", " + course.name + ", is run by instructor " + instructor.first_name + " " + instructor.last_name
-                                    except:
-                                        response = "ERROR: Could not grab instructor. "
-                                    break
+                                        break
+                                except Instructor.DoesNotExist:
+                                    response = "ERROR: Could not grab instructor."
+                            if response == "course":
+                                response = course.code + ", " + course.name + ", does not have an instructor."
                         elif re.search("lab", message):
                             response.append("lab")
                         elif re.search("prerequisite", message):
