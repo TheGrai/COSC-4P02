@@ -71,3 +71,11 @@ class CourseOffering(models.Model):
     start_date = models.DateField(null=True)
     end_date = models.DateField(null=True)
     schedule = models.JSONField(blank=True)
+
+class Exam(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    course = models.ForeignKey('Course', on_delete=models.CASCADE)
+    section = models.IntegerField()
+    date = models.DateField(null=True)
+    time = models.CharField(max_length=5, blank=True)
+    location = models.CharField(max_length=64, blank=True)
