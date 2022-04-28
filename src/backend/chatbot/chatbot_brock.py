@@ -135,21 +135,23 @@ def get_response(intents_list, intents_json, message):
                 course_regex = re.compile(r'[a-zA-Z]{4} *[0-5][a-zA-z][0-9][0-9]')
                 courseID = course_regex.search(message)
                 response = ""
-                try:
-                    course = Course.objects.get(code__iexact=courseID.group())
-                    exams = Exam.objects.filter(course=course.id)
-                    if topic == "aboutExam":
-                        for exam in exams:
-                            response += course.code + " section " + str(exam.section) +"'s exam will be taking place at " + exam.location + " on " + exam.date.strftime("%B %d %Y") + " at " + exam.time + ". "
-                    elif topic == "whereExam":
-                        for exam in exams:
-                            response += course.code + " section " + str(exam.section) + "'s exam will be taking place at " + exam.location + ". "
-                    elif topic == "whenExam":
-                        for exam in exams:
-                            response += course.code + " section " + str(exam.section) + "'s exam will be taking place on " + exam.date.strftime("%B %d %Y") + " at " + exam.time + ". "
-                except Course.DoesNotExist:
-                    response = "Hmmm, I can't seem to find information on this course exam. You can access the exam timetable here: https://www.brocku.ca/guides-and-timetables/exams/"
-
+                if courseID is not None:
+                    try:
+                        course = Course.objects.get(code__iexact=courseID.group())
+                        exams = Exam.objects.filter(course=course.id)
+                        if topic == "aboutExam":
+                            for exam in exams:
+                                response += course.code + " section " + str(exam.section) +"'s exam will be taking place at " + exam.location + " on " + exam.date.strftime("%B %d %Y") + " at " + exam.time + ". "
+                        elif topic == "whereExam":
+                            for exam in exams:
+                                response += course.code + " section " + str(exam.section) + "'s exam will be taking place at " + exam.location + ". "
+                        elif topic == "whenExam":
+                            for exam in exams:
+                                response += course.code + " section " + str(exam.section) + "'s exam will be taking place on " + exam.date.strftime("%B %d %Y") + " at " + exam.time + ". "
+                    except Course.DoesNotExist:
+                        response = "Hmmm, I can't seem to find information on this course exam. You can access the exam timetable here: https://www.brocku.ca/guides-and-timetables/exams/"
+                else:
+                    response = "∆ Please provide a valid course code"
             elif topic == "program":
                 subjectOfferings = Subject.objects.all()
                 possibleSubjects = []
