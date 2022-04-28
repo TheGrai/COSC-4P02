@@ -139,7 +139,7 @@ export const Chat = ({name}) => {
                 </button>
             </div>
             <div className="chat-container">
-                {messages.map((props) => (
+                    {messages.map((props) => (
                     <ChatBubble {...props} />
                 ))}
                 <div>
@@ -147,6 +147,7 @@ export const Chat = ({name}) => {
                 </div>
                 <br />
                 <div ref={chatRef}/>
+
             </div>
             <div className="input-container">
                 <button onClick={handleClearInput} className="clear-btn">
