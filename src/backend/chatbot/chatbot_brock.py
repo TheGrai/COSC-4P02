@@ -151,13 +151,10 @@ def get_response(intents_list, intents_json, message):
                 program_regex = re.compile(r'[a-z]* program')
                 program = program_regex.search(message)
                 if program is not None:
-                    response = ["program", program.group()]
-                    if re.search("requirement", message) or re.search("get into", message):
-                        response.append("requirement")
-                    else:
-                        response.append("about")
+                    #query for program under subject
+                    response  = "The " + program + " program at Brock University was found. It can be described as: " + subject.description + " More information about the program can be found here: " + subject.url
                 else:
-                    response = "∆ Please provide a better question about the program"
+                    response = "The " + program + " program at Brock University was not found. Perhaps it is under a different name. You can try to find it here: https://brocku.ca/webcal/"
 
             else:
                 response = random.choice(i['responses'])
