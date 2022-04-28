@@ -133,15 +133,15 @@ def get_response(intents_list, intents_json, message):
                 try:
                     course = Course.objects.get(code__iexact=courseID.group())
                     exams = Exam.object.filter(course_id=course.id)
-                    if topic == "about exam":
+                    if topic == "about":
                         response = ""
                         for exam in exams:
                             response += exam.code + " section " + exam.section +"'s exam will be taking place at " + exam.location + " on " + exam.date.strftime("%B %d %Y") + " at " + exam.start_time + "."
-                    elif topic == "where exam":
+                    elif topic == "where":
                         response = ""
                         for exam in exams:
                             response += exam.code + " section " + exam.section + "'s exam will be taking place at " + exam.location
-                    elif topic == "when exam":
+                    elif topic == "when":
                         response = ""
                         for exam in exams:
                             response += exam.code + " section " + exam.section + "'s exam will be taking place on " + exam.date.strftime("%B %d %Y") + " at " + exam.start_time + "."
