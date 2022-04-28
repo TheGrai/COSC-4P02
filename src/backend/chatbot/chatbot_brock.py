@@ -163,8 +163,6 @@ def get_response(intents_list, intents_json, message):
                     else:
                         response = "The program you were asking about at Brock University was not found. Perhaps it is under a different name. You can try to find it here: https://brocku.ca/webcal/"
 
-                print(possibleSubjects)
-
                 if bestSub is not "":
                     for pSub in possibleSubjects:
                             if SequenceMatcher(None, pSub.name, message).ratio() > SequenceMatcher(None, bestSub.name, message).ratio():
