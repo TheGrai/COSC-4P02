@@ -1,6 +1,8 @@
-# COSC-4P02
+# COSC-4P02 Chatbot Project
+## Overview
 The product will be a software chatbot application. This will be available either as a web app or a standalone application. The product will allow interface between a user interface, where end users can log in, and interact with the chat bot. An API which will be used to provide data through various parts of the product. A database for storing data on the summer games, brock information, and user accounts and history. Finally, the product will implement a natural language processor which will be used to provide responses to users' questions and provide accurate and informative information.
 
+## Framework
 The interface should be accessible through various means, a webapp will be implemented that will allow support for all devices with an internet browser. Anyone with a mobile phone, laptop, desktop, or tablet will be able to access the full functionality of the product. The front end will be made to adapt to various screen sizes and resolutions.
 
 The API will be the major data handler of the system. Data pulled into the database will flow into the database using the API, data requested from the front end will access API endpoints that will securely retrieve relevant information from the DBMS. Login and security will be handled security with the API as well. Furthermore, the natural language processor will feed responses and queries back and forth via this API. 
