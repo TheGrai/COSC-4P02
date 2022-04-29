@@ -11,11 +11,11 @@ Finally, the natural language processor is the fundamental point of the product.
 
 
 # Team Members
-| Name                  | Email             | std number            |
-| :---                  |    :----:         |          ---:         |
-| Grant Ferrier         | gf18fi@brocku.ca  | (6569388) Team Lead   |
-| Aldric Joya           | aj18gv@brocku.ca  | (6589865)             |
-| Sabih Zubair          | sz18oj@brocku.ca  | (6552152)             |
-| Justin Zhang          | jz16ig@brocku.ca  | (6217251)             |
-| Arin Yaldizciyan      | ay16va@brocku.ca  | (6068431)             |
-| Thanikash Kanagaratnam| tk18il@brocku.ca  | (6586085)             |
+| Name                      | Email             | std number            |
+| :---                      |    :----:         |          ---:         |
+| Aldric Joya               | aj18gv@brocku.ca  | (6589865)             |
+| Arin Yaldizciyan          | ay16va@brocku.ca  | (6068431)             |
+| Grant Ferrier (Team Lead) | gf18fi@brocku.ca  | (6569388)             |
+| Justin Zhang              | jz16ig@brocku.ca  | (6217251)             |
+| Sabih Zubair              | sz18oj@brocku.ca  | (6552152)             |
+| Thanikash Kanagaratnam    | tk18il@brocku.ca  | (6586085)             |
