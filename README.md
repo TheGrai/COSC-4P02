@@ -12,7 +12,7 @@ The DBMS system used will simply store multiple tables with the appropriate info
 Finally, the natural language processor is the fundamental point of the product. This will interact with the database as well as the frontend to understand user queries and return appropriate information. The algorithm should be able to understand simple questions and should be able to access relevant information from the database. 
 
 
-# Team Members
+## Team Members
 | Name                      | Email             | std number            |
 | :---                      |    :----:         |          ---:         |
 | Aldric Joya               | aj18gv@brocku.ca  | (6589865)             |
