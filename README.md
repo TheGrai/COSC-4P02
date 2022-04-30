@@ -2,6 +2,8 @@
 ## Overview
 The product will be a software chatbot application. This will be available either as a web app or a standalone application. The product will allow interface between a user interface, where end users can log in, and interact with the chat bot. An API which will be used to provide data through various parts of the product. A database for storing data on the summer games, brock information, and user accounts and history. Finally, the product will implement a natural language processor which will be used to provide responses to users' questions and provide accurate and informative information.
 
+##### Public Link
+[Chatbot](http://ec2-54-234-10-143.compute-1.amazonaws.com/)
 ## Framework
 The interface should be accessible through various means, a webapp will be implemented that will allow support for all devices with an internet browser. Anyone with a mobile phone, laptop, desktop, or tablet will be able to access the full functionality of the product. The front end will be made to adapt to various screen sizes and resolutions.
 
